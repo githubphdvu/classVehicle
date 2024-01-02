@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>classVehicle{}</title>
+</head>
+<body>
+  <h3>Press F12 to view console.log()</h3>
+  <script>
+//Part 1:create class vehicle.Each vehicle instance has propertie:make,method toString(returns string with make)
+class Vehicle {
+  constructor(make) {
+    this.make = make
+  }
+  toString() {return `The vehicle is a ${this.make}`}
+}
+let myVehicle = new Vehicle("Honda")
+console.log(myVehicle.toString())
+
+// Part 2:create class Car(inherits from Vehicle),has property numWheels(value 4)
+class Car extends Vehicle {
+  constructor(make) {
+    super(make)
+    this.numWheels = 4
+  }
+}
+let myCar = new Car("Toyota")
+console.log(myCar.toString())
+console.log(myCar.numWheels)
+
+//Part 3:create class Motorcycle(inherits from Vehicle),has property numWheels(value 2),method revEngine(returns “VROOM!!!”)
+class Motorcycle extends Vehicle {
+  constructor(make) {
+    super(make)
+    this.numWheels = 2
+  }
+  revEngine() {return "VROOM!!!"}
+}
+let myMotorcycle = new Motorcycle("Vespa")
+console.log(myMotorcycle.toString())
+console.log(myMotorcycle.revEngine())
+console.log(myMotorcycle.numWheels)
+
+//Part 4:create class Garage,has property vehicles(store array of vehicles),property capacity(number of vehicles will fit in garage)
+//When create garage,vehicles[] is empty; you only provide capacity number
+//garage also has method add to add a vehicle to vehicles[]
+//If try to add something which is not vehicle, garage returns “Only vehicles are allowed in here”
+//If garage is at capacity, it says “Sorry, we’re full”
+class Garage {
+  constructor(capacity) {
+    this.vehicles = []
+    this.capacity = capacity
+  }
+  add(newVehicle) {
+    if (!(newVehicle instanceof Vehicle)) return "Only vehicles are allowed in here"
+    if (this.vehicles.length >= this.capacity) return "Sorry, we're full"
+    this.vehicles.push(newVehicle)
+    return `Vehicle added`
+  }
+}
+let garage = new Garage(3)
+console.log(garage.vehicles)
+console.log(garage.add(new Vehicle("BMW")))
+console.log(garage.vehicles)
+console.log(garage.add(new Car("Hyundai")))
+console.log(garage.vehicles)
+console.log(garage.add("Ship"))
+console.log(garage.add(new Motorcycle("Acura")))
+console.log(garage.vehicles)
+console.log(garage.add(new Motorcycle("Honda")))
+  </script>
+  
+</body>
+</html>
